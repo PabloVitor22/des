@@ -1,0 +1,57 @@
+menu = '''
+========== Banco DIO =========
+------------------------------
+    [d] - Depósito 
+    [s] - Saque
+    [e] - Extato
+    [q] - Sair
+------------------------------
+==============================
+'''
+msg = '''
+===========================================
+   Obrigado Por Fazer Parte do Bando DIO
+           <<< Volte Sempre >>>
+===========================================
+'''
+extrato = ''
+saldo = 5000
+limite_saque = 500
+n_saque = 3
+saque = 0
+while True:
+    print(menu)
+    opc = input('Sua Opção: ')
+    if opc == 'q':
+        print(msg)
+        break
+    elif opc == 's':
+        saque = float(input('Valor a Sacar: '))
+        if saque <= limite_saque:
+            if n_saque >= 1 and n_saque <= 3:
+                if saque <= saldo:
+                    saldo -= saque
+                    n_saque -= 1
+                    extrato += f'- Saque: R${saque:.2f}\n'
+                    print(f'Voce Sacou R${saque:.2f}')
+                    print(f'Saldo Atual: R${saldo:.2f}')
+            else:
+                print('Número de Saques Diário Excedido!!')
+        if n_saque == 0:
+            print('Você Fez O Total de 3 Saques, Não Poderar Sacar Mais Hoje!!')
+        elif saque > limite_saque and saque < saldo:
+            print('Valor Máximo de Saque Excedido, O Valor Máximo é de R$500.00!!')
+        elif saque > saldo:
+           print('Saldo Insuficiente!!')
+    elif opc == 'd':
+        deposito = float(input('Valor de Depósito: '))
+        saldo += deposito
+        extrato += f'- Depósito: R${deposito:.2f}\n'
+        print(f'Você Depositou R${deposito:.2f}')
+        print(f'Saldo Atual: R${saldo:.2f}')
+    elif opc == 'e':
+        m = f'''
+============ EXTRATO BRANCÁRIO ===========
+{extrato}
+'''     
+        print(m)
